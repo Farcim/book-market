@@ -14,5 +14,5 @@ public class Book {
     private String name;
     private String author;
     private Integer price;
-
+    // add set of Genre and Author class
 }

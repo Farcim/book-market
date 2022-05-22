@@ -1,15 +1,12 @@
 package ru.example.bookmarket.service;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.example.bookmarket.BookException.BookNotFoundIdException;
+import ru.example.bookmarket.BookException.BookNotFoundException;
 import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.model.Book;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +24,10 @@ public class BookService {
     }
 
     public Book findById(Long id) {
-        if (bookRepository.existsById(id)) bookRepository.findById(id);
-        throw new BookNotFoundIdException(id);
+        if (bookRepository.existsById(id)) {
+            return bookRepository.findById(id).get();
+        }
+        throw new BookNotFoundException(id);
     }
 //    public Book findByBook(Book book){
 //        Map<Author,Name> map = new HashMap<>();
@@ -39,25 +38,21 @@ public class BookService {
 //    }
 
     public Book saveBook(Book book) {
-        if(bookRepository.findByBook(book)!=null) {
-            return bookRepository.save(book);
-        }
-        throw new EntityNotFoundException("Book is not exist");
+        return bookRepository.save(book);
     }
 
     public void deleteById(Long id) {
         if (bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
         }
-        throw new BookNotFoundIdException(id);
+        throw new BookNotFoundException(id);
     }
 
-    public void update(Book book, Long id) {
+    public Book update(Book book, Long id) {
         if (bookRepository.existsById(id)) {
             bookRepository.save(book);
-        } else {
-            throw new BookNotFoundIdException(id);
         }
+        throw new BookNotFoundException(id);
     }
 
 }
