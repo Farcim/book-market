@@ -1,15 +1,12 @@
 package ru.example.bookmarket.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.service.BookService;
 
@@ -17,6 +14,7 @@ import ru.example.bookmarket.service.BookService;
 @RestController
 @RequiredArgsConstructor
 public class BookController {
+
     private final BookService bookService;
 
     @PostMapping
@@ -28,19 +26,31 @@ public class BookController {
     public Book findBy(@RequestParam(required = false) String author, @RequestParam(required = false) String name) {
         return bookService.findBy(author, name);
     }
-
+    @Operation(summary = "Show all books from db")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode="200",
+                    description = "Show",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Not available",
+                    content =@Content)
+    })
     @GetMapping(value = "/{id}")
-    public Book findById(@PathVariable Long id) {
+    public BookDTO findById(@PathVariable Long id){
         return bookService.findById(id);
     }
 
     @PutMapping(value = "/{id}")
-    public Book update(@RequestParam Book book, @PathVariable Long id) {
-        return bookService.update(book, id);
+    public void update(@RequestParam Book book, @PathVariable Long id) {
+        bookService.update(book, id);
     }
+
 
     @DeleteMapping(value = "/{id}")
     public void deleteById(@PathVariable Long id) {
         bookService.deleteById(id);
     }
+
 }
+
+

@@ -29,13 +29,6 @@ public class BookService {
         }
         throw new BookNotFoundException(id);
     }
-//    public Book findByBook(Book book){
-//        Map<Author,Name> map = new HashMap<>();
-//        if(bookRepository.exists(map)){
-//            return  book;
-//        }
-//        throw new EntityNotFoundException("Book is not exist");
-//    }
 
     public Book saveBook(Book book) {
         return bookRepository.save(book);
