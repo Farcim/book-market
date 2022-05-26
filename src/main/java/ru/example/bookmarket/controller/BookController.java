@@ -35,7 +35,7 @@ public class BookController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping
+    @GetMapping("/{id}")
     public BookDTO findById(@PathVariable Long id) {
         return bookService.findById(id);
     }
@@ -46,7 +46,7 @@ public class BookController {
     }
 
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         bookService.deleteById(id);
     }

@@ -1,10 +1,13 @@
 package ru.example.bookmarket.service;
 
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.UtilityClass;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.model.Book;
 
-
+@UtilityClass
 public class BookConverter {
     public static BookDTO convertEntityToDTO(Book book){
         return BookDTO.builder()
