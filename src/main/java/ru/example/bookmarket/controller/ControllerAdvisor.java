@@ -1,5 +1,7 @@
 package ru.example.bookmarket.controller;
 
+import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,11 +13,9 @@ import ru.example.bookmarket.BookException.BookNotFoundIdException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+@NoArgsConstructor
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
-    public ControllerAdvisor() {
-    }
 
     @ExceptionHandler(BookNotFoundIdException.class)
     public ResponseEntity<Object> handleBookNotFoundException(BookNotFoundIdException ex, WebRequest request) {

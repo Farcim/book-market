@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.example.bookmarket.BookException.BookNotFoundIdException;
 import ru.example.bookmarket.dto.BookDTO;
-import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.model.Book;
+import ru.example.bookmarket.repository.BookRepository;
+
 import javax.persistence.EntityNotFoundException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +43,8 @@ public class BookService {
         }
     }
 
-    public BookDTO saveBook(Book book) {
+    public BookDTO save(BookDTO bookDTO) {
+        Book book = BookConverter.convertDTOToEntity(bookDTO);
         return BookConverter.convertEntityToDTO(bookRepository.save(book));
     }
 }
