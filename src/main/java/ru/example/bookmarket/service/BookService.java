@@ -2,50 +2,46 @@ package ru.example.bookmarket.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.example.bookmarket.BookException.BookNotFoundException;
+import ru.example.bookmarket.BookException.BookNotFoundIdException;
+import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.model.Book;
-
 import javax.persistence.EntityNotFoundException;
 
 @Service
 @RequiredArgsConstructor
 public class BookService {
-
     private final BookRepository bookRepository;
-
-    public Book findBy(String author, String name) {
+    public BookDTO findBy(String author, String name) {
         if (author != null) {
-            return bookRepository.findByAuthor(author);
+            return BookConverter.convertEntityToDTO(bookRepository.findByAuthor(author));
         } else if (name != null) {
-            return bookRepository.findByName(name);
+            return BookConverter.convertEntityToDTO(bookRepository.findByName(name));
         }
         throw new EntityNotFoundException("Book is not found");
     }
 
-    public Book findById(Long id) {
-        if (bookRepository.existsById(id)) {
-            return bookRepository.findById(id).get();
-        }
-        throw new BookNotFoundException(id);
-    }
-
-    public Book saveBook(Book book) {
-        return bookRepository.save(book);
+    public BookDTO findById(Long id) {
+        return BookConverter.convertEntityToDTO(bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundIdException(id)));
     }
 
     public void deleteById(Long id) {
         if (bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
         }
-        throw new BookNotFoundException(id);
+        throw new BookNotFoundIdException(id);
     }
 
-    public Book update(Book book, Long id) {
-        if (bookRepository.existsById(id)) {
-            bookRepository.save(book);
+    public void update(BookDTO book) {
+        if (bookRepository.existsById(book.getId())) {
+            bookRepository.save(BookConverter.convertDTOToEntity(book));
+        } else {
+            throw new BookNotFoundIdException(book.getId());
         }
-        throw new BookNotFoundException(id);
     }
 
+    public BookDTO saveBook(Book book) {
+        return BookConverter.convertEntityToDTO(bookRepository.save(book));
+    }
 }

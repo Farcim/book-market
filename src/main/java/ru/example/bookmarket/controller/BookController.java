@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.example.bookmarket.dto.BookDTO;
-import ru.example.bookmarket.model.Book;
+import ru.example.bookmarket.service.BookConverter;
 import ru.example.bookmarket.service.BookService;
 
 @RequestMapping(value = "/book")
@@ -16,17 +16,16 @@ import ru.example.bookmarket.service.BookService;
 public class BookController {
 
     private final BookService bookService;
-
     @PostMapping
-    public Book saveBook(@RequestBody Book book) {
-        return bookService.saveBook(book);
+    public BookDTO saveBook(@RequestBody BookDTO book) {
+        return bookService.saveBook(BookConverter.convertDTOToEntity(book));
     }
 
     @GetMapping
-    public Book findBy(@RequestParam(required = false) String author, @RequestParam(required = false) String name) {
+    public BookDTO findBy(@RequestParam(required = false) String author, @RequestParam(required = false) String name) {
         return bookService.findBy(author, name);
     }
-    @Operation(summary = "Show all books from db")
+    @Operation(summary = "Find by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode="200",
                     description = "Show",
@@ -41,8 +40,8 @@ public class BookController {
     }
 
     @PutMapping(value = "/{id}")
-    public void update(@RequestParam Book book, @PathVariable Long id) {
-        bookService.update(book, id);
+    public void update(@RequestParam BookDTO book) {
+        bookService.update(book);
     }
 
 
