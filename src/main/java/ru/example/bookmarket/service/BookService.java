@@ -14,11 +14,9 @@ import javax.persistence.EntityNotFoundException;
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
-    public BookDTO findBy(String author, String name) {
+    public BookDTO findBy(String author) {
         if (author != null) {
             return BookConverter.convertEntityToDTO(bookRepository.findByAuthor(author));
-        } else if (name != null) {
-            return BookConverter.convertEntityToDTO(bookRepository.findByName(name));
         }
         throw new EntityNotFoundException("Book is not found");
     }
