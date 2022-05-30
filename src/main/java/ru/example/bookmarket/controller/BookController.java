@@ -22,8 +22,8 @@ public class BookController {
     }
 
     @GetMapping
-    public BookDTO findBy(@RequestParam(required = false) String author, @RequestParam(required = false) String name) {
-        return bookService.findBy(author, name);
+    public BookDTO findByAuthor(@RequestParam(required = false) String author) {
+        return bookService.findBy(author);
     }
 
     @Operation(summary = "Find by id")
