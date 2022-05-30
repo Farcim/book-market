@@ -1,12 +1,19 @@
 package ru.example.bookmarket.model;
 
-import lombok.Data;
+import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import javax.persistence.*;
-
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "Book")
+@Builder
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,5 +21,5 @@ public class Book {
     private String name;
     private String author;
     private Integer price;
-    // add set of Genre and Author class
+
 }
