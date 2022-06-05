@@ -1,4 +1,4 @@
-package ru.example.bookmarket.BookException;
+package ru.example.bookmarket.exception;
 
 import javax.persistence.EntityNotFoundException;
 

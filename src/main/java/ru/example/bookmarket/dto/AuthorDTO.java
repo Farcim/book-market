@@ -2,15 +2,14 @@ package ru.example.bookmarket.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.example.bookmarket.model.Author;
-
+import ru.example.bookmarket.genries.Genre;
 import java.util.Set;
 
-@Data
 @Builder
-public class BookDTO  {
+@Data
+public class AuthorDTO {
     private Long id;
     private String name;
-    private Set<Author> author;
-    private Integer price;
+    private Set<Genre> genres;
+
 }
