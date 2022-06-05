@@ -3,6 +3,7 @@ package ru.example.bookmarket.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,9 +18,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "author_id")
-    private Author author;
+    private Set<Author> author;
     private Integer price;
 
 }
