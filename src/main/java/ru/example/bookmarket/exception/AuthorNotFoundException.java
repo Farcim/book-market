@@ -8,6 +8,6 @@ public class AuthorNotFoundException extends EntityNotFoundException {
     }
 
     public AuthorNotFoundException(String name) {
-        super(String.format("Author with id '%s' is not exist", name));
+        super(String.format("Author with name '%s' is not exist", name));
     }
 }

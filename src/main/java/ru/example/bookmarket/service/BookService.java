@@ -2,8 +2,8 @@ package ru.example.bookmarket.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.example.bookmarket.exception.BookNotFoundException;
 import ru.example.bookmarket.dto.BookDTO;
+import ru.example.bookmarket.exception.BookNotFoundException;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.util.Converter;
@@ -17,13 +17,13 @@ public class BookService {
     private final BookRepository bookRepository;
     public BookDTO findBy(String author) {
         if (author != null) {
-            return Converter.convertEntityToDTO(bookRepository.findByAuthor(author));
+            return Converter.bookToDTO(bookRepository.findByAuthor(author));
         }
         throw new EntityNotFoundException("Book is not found");
     }
 
     public BookDTO findById(Long id) {
-        return Converter.convertEntityToDTO(bookRepository.findById(id)
+        return Converter.bookToDTO(bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id)));
     }
 
@@ -36,14 +36,14 @@ public class BookService {
 
     public void update(BookDTO book) {
         if (bookRepository.existsById(book.getId())) {
-            bookRepository.save(Converter.convertDTOToEntity(book));
+            bookRepository.save(Converter.dtoToBook(book));
         } else {
             throw new BookNotFoundException(book.getId());
         }
     }
 
     public BookDTO save(BookDTO bookDTO) {
-        Book book = Converter.convertDTOToEntity(bookDTO);
-        return Converter.convertEntityToDTO(bookRepository.save(book));
+        Book book = Converter.dtoToBook(bookDTO);
+        return Converter.bookToDTO(bookRepository.save(book));
     }
 }
