@@ -3,12 +3,8 @@ package ru.example.bookmarket.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.example.bookmarket.dto.AuthorDTO;
-import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.exception.AuthorNotFoundException;
-import ru.example.bookmarket.exception.BookNotFoundException;
-import ru.example.bookmarket.genries.Genre;
 import ru.example.bookmarket.model.Author;
-import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.repository.AuthorRepository;
 import ru.example.bookmarket.util.Converter;
 
@@ -18,13 +14,13 @@ public class AuthorService {
     private final AuthorRepository authorRepository;
 
     public AuthorDTO save(AuthorDTO authorDTO) {
-        Author author1 = Converter.convertDTOToEntity(authorDTO);
-        return Converter.convertEntityToDTO(authorRepository.save(author1));
+        Author author = Converter.dtoToAuthor(authorDTO);
+        return Converter.authorToDTO(authorRepository.save(author));
     }
 
     public void update(AuthorDTO authorDTO) {
         if (authorRepository.existsById(authorDTO.getId())) {
-            authorRepository.save(Converter.convertDTOToEntity(authorDTO));
+            authorRepository.save(Converter.dtoToAuthor(authorDTO));
         } else {
             throw new AuthorNotFoundException(authorDTO.getId());
         }
@@ -36,7 +32,7 @@ public class AuthorService {
         throw new AuthorNotFoundException(id);
     }
     public AuthorDTO findById(Long id) {
-        return Converter.convertEntityToDTO(authorRepository.findById(id)
+        return Converter.authorToDTO(authorRepository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id)));
     }
 }

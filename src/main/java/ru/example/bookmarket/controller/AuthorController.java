@@ -13,7 +13,7 @@ import ru.example.bookmarket.service.AuthorService;
 @RequestMapping(value = "/author")
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Author controller",description = "test Author entity methods")
+@Tag(name = "Author controller", description = "CRUD methods with author")
 public class AuthorController {
     private final AuthorService authorService;
     @Operation(summary = "Save author")

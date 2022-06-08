@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ElementCollection

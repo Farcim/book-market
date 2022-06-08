@@ -13,7 +13,7 @@ import ru.example.bookmarket.service.BookService;
 @RequestMapping(value = "/book")
 @RestController
 @RequiredArgsConstructor
-@Tag(name="Book controller", description="test Book entity methods")
+@Tag(name = "Book controller", description = "CRUD methods with book")
 public class BookController {
 
     private final BookService bookService;
