@@ -20,7 +20,7 @@ public class Book {
     private String name;
     @ManyToMany
     @JoinColumn(name = "author_id")
-    private Set<Author> author;
+    private Set<Author> authors;
     private Integer price;
 
 }
