@@ -15,7 +15,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Builder
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
