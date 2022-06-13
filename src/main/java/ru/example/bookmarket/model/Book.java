@@ -19,7 +19,6 @@ public class Book {
     private Long id;
     private String name;
     @ManyToMany
-    @JoinColumn(name = "author_id")
     private Set<Author> author;
     private Integer price;
 

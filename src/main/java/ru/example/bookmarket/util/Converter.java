@@ -11,7 +11,7 @@ public class Converter {
     public static BookDTO bookToDTO(Book book) {
         return BookDTO.builder()
                 .id(book.getId())
-                .author(book.getAuthor()
+                .authors(book.getAuthor()
                         .stream()
                         .map(Converter::authorToDTO)
                         .collect(Collectors.toSet()))
@@ -23,7 +23,7 @@ public class Converter {
     public static Book dtoToBook(BookDTO bookDTO) {
         return Book.builder()
                 .id(bookDTO.getId())
-                .author(bookDTO.getAuthor()
+                .author(bookDTO.getAuthors()
                         .stream()
                         .map(Converter::dtoToAuthor)
                         .collect(Collectors.toSet()))
