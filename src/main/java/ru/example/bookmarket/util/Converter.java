@@ -2,8 +2,10 @@ package ru.example.bookmarket.util;
 
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
+import ru.example.bookmarket.dto.GenreDTO;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
+import ru.example.bookmarket.model.Genre;
 
 import java.util.stream.Collectors;
 
@@ -35,7 +37,10 @@ public class Converter {
     public static AuthorDTO authorToDTO(Author author) {
         return AuthorDTO.builder()
                 .id(author.getId())
-                .genres(author.getGenres())
+                .genres(author.getGenres()
+                        .stream()
+                        .map(Converter::genreToDTO)
+                        .collect(Collectors.toSet()))
                 .name(author.getName())
                 .build();
     }
@@ -43,8 +48,26 @@ public class Converter {
     public static Author dtoToAuthor(AuthorDTO authorDTO) {
         return Author.builder()
                 .id(authorDTO.getId())
-                .genres(authorDTO.getGenres())
+                .genres(authorDTO.getGenres()
+                        .stream()
+                        .map(Converter::dtoToGenre)
+                        .collect(Collectors.toSet()))
                 .name(authorDTO.getName())
                 .build();
     }
+
+    public static GenreDTO genreToDTO(Genre genre) {
+        return GenreDTO.builder()
+                .id(genre.getId())
+                .name(genre.getName())
+                .build();
+    }
+
+    public static Genre dtoToGenre(GenreDTO genreDTO) {
+        return Genre.builder()
+                .id(genreDTO.getId())
+                .name(genreDTO.getName())
+                .build();
+    }
+
 }

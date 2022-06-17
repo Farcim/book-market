@@ -2,25 +2,22 @@ package ru.example.bookmarket.model;
 
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.Set;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Builder
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-public class Author {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany
-    private Set<Genre> genres;
-    //secondarytable//
 }
