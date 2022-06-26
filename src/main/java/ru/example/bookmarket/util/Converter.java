@@ -2,12 +2,14 @@ package ru.example.bookmarket.util;
 
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
-import ru.example.bookmarket.dto.GenreDTO;
+import ru.example.bookmarket.exception.GenreNotFoundException;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Converter {
     public static BookDTO bookToDTO(Book book) {
@@ -39,7 +41,7 @@ public class Converter {
                 .id(author.getId())
                 .genres(author.getGenres()
                         .stream()
-                        .map(Converter::genreToDTO)
+                        .map(Converter::convert)
                         .collect(Collectors.toSet()))
                 .name(author.getName())
                 .build();
@@ -50,23 +52,23 @@ public class Converter {
                 .id(authorDTO.getId())
                 .genres(authorDTO.getGenres()
                         .stream()
-                        .map(Converter::dtoToGenre)
+                        .map(Converter::convert)
                         .collect(Collectors.toSet()))
                 .name(authorDTO.getName())
                 .build();
     }
 
-    public static GenreDTO genreToDTO(Genre genre) {
-        return GenreDTO.builder()
-                .id(genre.getId())
-                .name(genre.getName())
-                .build();
+    public static ru.example.bookmarket.genries.Genre convert(Genre genre) {
+        return Stream.of(ru.example.bookmarket.genries.Genre.values())
+                .filter(genreModel -> Objects.equals(genre.getName(), genreModel.name()))
+                .findFirst()
+                .orElseThrow(() -> new GenreNotFoundException(genre.getName()));
     }
 
-    public static Genre dtoToGenre(GenreDTO genreDTO) {
+    public static Genre convert(ru.example.bookmarket.genries.Genre genreEnum) {
         return Genre.builder()
-                .id(genreDTO.getId())
-                .name(genreDTO.getName())
+                .name(genreEnum.name())
+                .id(genreEnum.getId())
                 .build();
     }
 
