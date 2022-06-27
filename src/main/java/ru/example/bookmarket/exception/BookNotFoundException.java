@@ -3,7 +3,7 @@ package ru.example.bookmarket.exception;
 import javax.persistence.EntityNotFoundException;
 
 public class BookNotFoundException extends EntityNotFoundException {
-    public BookNotFoundException(long id) {
+    public BookNotFoundException(Long id) {
         super(String.format("Book with id '%d' is not exist", id));
     }
 
