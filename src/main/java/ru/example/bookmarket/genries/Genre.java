@@ -10,7 +10,7 @@ public enum Genre {
     DRAMA(2,"DRAMA"),
     ROMAN(3,"ROMAN"),
     ADVENTURE(4,"ADVENTURE");
-    private final int id;
+    private final Integer id;
     private final String name;
 
 }

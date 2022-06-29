@@ -7,6 +7,9 @@ import ru.example.bookmarket.genries.Genre;
 import ru.example.bookmarket.repository.GenreRepository;
 import ru.example.bookmarket.util.Converter;
 
+import java.util.Collection;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GenreService {
@@ -35,6 +38,10 @@ public class GenreService {
             genreRepository.deleteById(id);
         }
         throw new GenreNotFoundException(id);
+    }
+
+    public List<ru.example.bookmarket.model.Genre> findAllByIds(Collection<Integer> ids) {
+        return genreRepository.findAllById(ids);
     }
 
 }

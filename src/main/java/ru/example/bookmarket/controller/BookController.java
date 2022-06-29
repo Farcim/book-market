@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.example.bookmarket.dto.BookDTO;
+import ru.example.bookmarket.dto.BookDTOSave;
 import ru.example.bookmarket.service.BookService;
 
 @RequestMapping(value = "/book")
@@ -28,7 +29,7 @@ public class BookController {
                     content = @Content)
     })
     @PostMapping
-    public BookDTO saveBook(@RequestBody BookDTO book) {
+    public BookDTO saveBook(@RequestBody BookDTOSave book) {
         return bookService.save(book);
     }
 
