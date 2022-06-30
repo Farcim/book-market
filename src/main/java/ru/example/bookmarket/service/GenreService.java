@@ -1,47 +1,31 @@
 package ru.example.bookmarket.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.example.bookmarket.exception.GenreNotFoundException;
 import ru.example.bookmarket.genries.Genre;
 import ru.example.bookmarket.repository.GenreRepository;
 import ru.example.bookmarket.util.Converter;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class GenreService {
     private final GenreRepository genreRepository;
 
-    public Genre save(Genre genreEnum) {
-        var entity = Converter.convert(genreEnum);
-        return Converter.convert(genreRepository.save(entity));
+    public List<Genre> findAllByIds(Collection<Integer> ids) {
+        return genreRepository.findAllById(ids).stream()
+                .map(Converter::entityToEnum)
+                .collect(Collectors.toList());
     }
 
-    public Genre findById(int id) {
-        return Converter.convert(genreRepository.findById(id)
-                .orElseThrow(() -> new GenreNotFoundException(id)));
-    }
-
-    public void update(Genre genreEnum) {
-        if (genreRepository.existsById(genreEnum.getId())) {
-            genreRepository.save(Converter.convert(genreEnum));
-        } else {
-            throw new GenreNotFoundException(genreEnum.getId());
-        }
-    }
-
-    public void deleteById(int id) {
-        if (genreRepository.existsById(id)) {
-            genreRepository.deleteById(id);
-        }
-        throw new GenreNotFoundException(id);
-    }
-
-    public List<ru.example.bookmarket.model.Genre> findAllByIds(Collection<Integer> ids) {
-        return genreRepository.findAllById(ids);
+    public Page<Genre> getGenres(Pageable pageable) {
+        return genreRepository.findAll(pageable)
+                .map(Converter::entityToEnum);
     }
 
 }

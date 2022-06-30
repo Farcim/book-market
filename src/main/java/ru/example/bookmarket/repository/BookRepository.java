@@ -6,7 +6,8 @@ import ru.example.bookmarket.model.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-     Book findByAuthor(String author);
+     Book findByAuthors(String authors);
+
      Book findByName(String name);
 
 }

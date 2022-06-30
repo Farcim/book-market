@@ -21,7 +21,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .genres(book.getGenres()
                         .stream()
-                        .map(Converter::convert)
+                        .map(Converter::entityToEnum)
                         .collect(Collectors.toSet()))
                 .name(book.getName())
                 .price(book.getPrice())
@@ -37,7 +37,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .genres(bookDTO.getGenres()
                         .stream()
-                        .map(Converter::convert)
+                        .map(Converter::enumToEntity)
                         .collect(Collectors.toSet()))
                 .name(bookDTO.getName())
                 .price(bookDTO.getPrice())
@@ -49,7 +49,7 @@ public class Converter {
                 .id(author.getId())
                 .genres(author.getGenres()
                         .stream()
-                        .map(Converter::convert)
+                        .map(Converter::entityToEnum)
                         .collect(Collectors.toSet()))
                 .name(author.getName())
                 .build();
@@ -60,20 +60,20 @@ public class Converter {
                 .id(authorDTO.getId())
                 .genres(authorDTO.getGenres()
                         .stream()
-                        .map(Converter::convert)
+                        .map(Converter::enumToEntity)
                         .collect(Collectors.toSet()))
                 .name(authorDTO.getName())
                 .build();
     }
 
-    public static ru.example.bookmarket.genries.Genre convert(Genre genre) {
+    public static ru.example.bookmarket.genries.Genre entityToEnum(Genre genre) {
         return Stream.of(ru.example.bookmarket.genries.Genre.values())
                 .filter(genreModel -> Objects.equals(genre.getName(), genreModel.name()))
                 .findFirst()
                 .orElseThrow(() -> new GenreNotFoundException(genre.getName()));
     }
 
-    public static Genre convert(ru.example.bookmarket.genries.Genre genreEnum) {
+    public static Genre enumToEntity(ru.example.bookmarket.genries.Genre genreEnum) {
         return Genre.builder()
                 .name(genreEnum.name())
                 .id(genreEnum.getId())

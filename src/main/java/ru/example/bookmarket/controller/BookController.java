@@ -5,20 +5,17 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
-import ru.example.bookmarket.service.BookService;
 
 @RequestMapping(value = "/book")
 @RestController
-@RequiredArgsConstructor
 @Tag(name = "Book controller", description = "CRUD methods with book")
-public class BookController {
-
-    private final BookService bookService;
-
+public interface BookController {
     @Operation(summary = "Save book")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -29,9 +26,7 @@ public class BookController {
                     content = @Content)
     })
     @PostMapping
-    public BookDTO saveBook(@RequestBody BookDTOSave book) {
-        return bookService.save(book);
-    }
+    BookDTO saveBook(@RequestBody BookDTOSave book);
 
     @Operation(summary = "Find by author")
     @ApiResponses(value = {
@@ -43,9 +38,7 @@ public class BookController {
                     content = @Content)
     })
     @GetMapping
-    public BookDTO findByAuthor(@RequestParam(required = false) String author) {
-        return bookService.findBy(author);
-    }
+    BookDTO findByAuthor(@RequestParam(required = false) String author);
 
     @Operation(summary = "Find by id")
     @ApiResponses(value = {
@@ -57,9 +50,7 @@ public class BookController {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public BookDTO findById(@PathVariable Long id) {
-        return bookService.findById(id);
-    }
+    BookDTO findById(@PathVariable Long id);
 
     @Operation(summary = "Update book")
     @ApiResponses(value = {
@@ -70,10 +61,9 @@ public class BookController {
                     description = "Not available",
                     content = @Content)
     })
+
     @PutMapping
-    public void update(@RequestParam BookDTO book) {
-        bookService.update(book);
-    }
+    void update(@RequestParam BookDTO book);
 
     @Operation(summary = "Delete by id")
     @ApiResponses(value = {
@@ -85,10 +75,17 @@ public class BookController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
-        bookService.deleteById(id);
-    }
+    void deleteById(@PathVariable Long id);
 
+    @Operation(summary = "Get all books")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Get",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Not available",
+                    content = @Content)
+    })
+    @GetMapping("/getByPage")
+    Page<BookDTO> getByPage(@PageableDefault Pageable pageable);
 }
-
-

@@ -1,19 +1,22 @@
 package ru.example.bookmarket.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
 import ru.example.bookmarket.exception.BookNotFoundException;
-import ru.example.bookmarket.model.Author;
+import ru.example.bookmarket.genries.Genre;
 import ru.example.bookmarket.model.Book;
-import ru.example.bookmarket.model.Genre;
 import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.util.Converter;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -25,7 +28,7 @@ public class BookService {
 
     public BookDTO findBy(String author) {
         if (author != null) {
-            return Converter.bookToDTO(bookRepository.findByAuthor(author));
+            return Converter.bookToDTO(bookRepository.findByAuthors(author));
         }
         throw new EntityNotFoundException("Book is not found");
     }
@@ -53,14 +56,23 @@ public class BookService {
 
     public BookDTO save(BookDTOSave dto) {
         List<Genre> genres = genreService.findAllByIds(dto.getGenreIds());
-        List<Author> authors = authorService.findAllBeIds(dto.getAuthorIds());
+        List<AuthorDTO> authors = authorService.findAllByIds(dto.getAuthorIds());
         Book book = Book.builder()
                 .id(dto.getId())
                 .name(dto.getName())
-                .genres(new HashSet<>(genres))
-                .author(new HashSet<>(authors))
+                .genres(new HashSet<>(genres.stream()
+                        .map(Converter::enumToEntity)
+                        .collect(Collectors.toSet())))
+                .authors(new HashSet<>(authors.stream()
+                        .map(Converter::dtoToAuthor)
+                        .collect(Collectors.toSet())))
                 .price(dto.getPrice())
                 .build();
         return Converter.bookToDTO(bookRepository.save(book));
+    }
+
+    public Page<BookDTO> getByPage(Pageable pageable) {
+        return bookRepository.findAll(pageable)
+                .map(Converter::bookToDTO);
     }
 }

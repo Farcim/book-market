@@ -1,7 +1,6 @@
 package ru.example.bookmarket.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import ru.example.bookmarket.util.Converter;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,10 +45,14 @@ public class AuthorService {
                 .orElseThrow(() -> new AuthorNotFoundException(id)));
     }
 
-    public List<Author> findAllBeIds(Collection<Long> ids) {
-        return authorRepository.findAllById(ids);
+    public List<AuthorDTO> findAllByIds(Collection<Long> ids) {
+        return authorRepository.findAllById(ids)
+                .stream()
+                .map(Converter::authorToDTO)
+                .collect(Collectors.toList());
     }
-    public Page<AuthorDTO> getByPage(Pageable pageable){
+
+    public Page<AuthorDTO> getByPage(Pageable pageable) {
         return authorRepository.findAll(pageable)
                 .map(Converter::authorToDTO);
     }
