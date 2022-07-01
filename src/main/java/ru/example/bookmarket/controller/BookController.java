@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
 
+import java.util.List;
+
 @RequestMapping(value = "/book")
 @RestController
 @Tag(name = "Book controller", description = "CRUD methods with book")
@@ -38,7 +40,7 @@ public interface BookController {
                     content = @Content)
     })
     @GetMapping
-    BookDTO findByAuthor(@RequestParam(required = false) String author);
+    List<BookDTO> findByAuthorName(@RequestParam(required = false) String authorName);
 
     @Operation(summary = "Find by id")
     @ApiResponses(value = {

@@ -45,11 +45,8 @@ public class AuthorService {
                 .orElseThrow(() -> new AuthorNotFoundException(id)));
     }
 
-    public List<AuthorDTO> findAllByIds(Collection<Long> ids) {
-        return authorRepository.findAllById(ids)
-                .stream()
-                .map(Converter::authorToDTO)
-                .collect(Collectors.toList());
+    public List<Author> findAllByIds(Collection<Long> ids) {
+        return authorRepository.findAllById(ids);
     }
 
     public Page<AuthorDTO> getByPage(Pageable pageable) {

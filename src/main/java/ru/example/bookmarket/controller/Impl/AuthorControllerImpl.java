@@ -1,4 +1,4 @@
-package ru.example.bookmarket.controllerImpl;
+package ru.example.bookmarket.controller.Impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -21,17 +21,6 @@ import java.util.List;
 @RestController
 @Tag(name = "Genre controller", description = "Get genres from table")
 public interface GenreController {
-    @Operation(summary = "Find by id`s")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "Find",
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode = "404",
-                    description = "Not available",
-                    content = @Content)
-    })
-    @GetMapping("/findBy/{ids}")
-    List<Genre> findAllByIds(@RequestParam Collection<Integer> ids);
 
     @Operation(summary = "Show all genres")
     @ApiResponses(value = {
@@ -42,6 +31,6 @@ public interface GenreController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping("/getAllGenres")
+    @GetMapping()
     Page<Genre> getGenres(@PageableDefault Pageable pageable);
 }

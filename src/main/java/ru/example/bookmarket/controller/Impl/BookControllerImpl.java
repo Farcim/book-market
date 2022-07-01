@@ -1,4 +1,4 @@
-package ru.example.bookmarket.controllerImpl;
+package ru.example.bookmarket.controller.Impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +13,8 @@ import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
 import ru.example.bookmarket.service.BookService;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -23,8 +25,8 @@ public class BookControllerImpl implements BookController {
         return bookService.save(book);
     }
 
-    public BookDTO findByAuthor(@RequestParam(required = false) String author) {
-        return bookService.findBy(author);
+    public List<BookDTO> findByAuthorName(@RequestParam(required = false) String authorName) {
+        return bookService.findByAuthorName(authorName);
     }
 
     public BookDTO findById(@PathVariable Long id) {

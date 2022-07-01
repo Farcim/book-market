@@ -17,10 +17,8 @@ import java.util.stream.Collectors;
 public class GenreService {
     private final GenreRepository genreRepository;
 
-    public List<Genre> findAllByIds(Collection<Integer> ids) {
-        return genreRepository.findAllById(ids).stream()
-                .map(Converter::entityToEnum)
-                .collect(Collectors.toList());
+    public List<ru.example.bookmarket.model.Genre> findAllByIds(Collection<Integer> ids) {
+        return genreRepository.findAllById(ids);
     }
 
     public Page<Genre> getGenres(Pageable pageable) {
