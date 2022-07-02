@@ -14,8 +14,8 @@ import ru.example.bookmarket.service.GenreService;
 public class GenreControllerImpl implements GenreController {
     private final GenreService genreService;
 
-    public Page<Genre> getGenres(@PageableDefault(size = 5, page = 0) Pageable pageable) {
-        return genreService.getGenres(pageable);
+    public Page<Genre> getGenres(@PageableDefault(size = 10, page = 0) Pageable pageable) {
+        return genreService.getAllGenres(pageable);
     }
 
 }

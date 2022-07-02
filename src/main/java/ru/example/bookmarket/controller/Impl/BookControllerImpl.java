@@ -41,7 +41,7 @@ public class BookControllerImpl implements BookController {
         bookService.deleteById(id);
     }
 
-    public Page<BookDTO> getByPage(@PageableDefault Pageable pageable) {
+    public Page<BookDTO> getByPage(@PageableDefault(size = 10,page = 0) Pageable pageable) {
         return bookService.getByPage(pageable);
     }
 }

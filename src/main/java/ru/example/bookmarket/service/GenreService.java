@@ -10,7 +10,6 @@ import ru.example.bookmarket.util.Converter;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class GenreService {
         return genreRepository.findAllById(ids);
     }
 
-    public Page<Genre> getGenres(Pageable pageable) {
+    public Page<Genre> getAllGenres(Pageable pageable) {
         return genreRepository.findAll(pageable)
                 .map(Converter::entityToEnum);
     }
