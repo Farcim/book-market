@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
+import ru.example.bookmarket.exception.AuthorNotFoundException;
 import ru.example.bookmarket.exception.BookNotFoundException;
+import ru.example.bookmarket.exception.InvalidRequestException;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
@@ -28,11 +30,15 @@ public class BookService {
 
     public List<BookDTO> findByAuthorName(String authorName) {
         if (authorName != null) {
-            return bookRepository.findByAuthorName(authorName).stream()
-                    .map(Converter::bookToDTO)
-                    .collect(Collectors.toList());
+            try {
+                return bookRepository.findByAuthorName(authorName).stream()
+                        .map(Converter::bookToDTO)
+                        .collect(Collectors.toList());
+            } catch (EntityNotFoundException e) {
+                throw new AuthorNotFoundException(authorName);
+            }
         } else {
-            throw new EntityNotFoundException("Book is not found");
+            throw new InvalidRequestException("You entered empty name");
         }
     }
 

@@ -31,6 +31,6 @@ public interface GenreController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping("/genre")
+    @GetMapping("/page")
     Page<Genre> getGenres(@PageableDefault Pageable pageable);
 }
