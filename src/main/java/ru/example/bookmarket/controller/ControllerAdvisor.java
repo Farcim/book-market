@@ -9,6 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.example.bookmarket.exception.AuthorNotFoundException;
 import ru.example.bookmarket.exception.BookNotFoundException;
+import ru.example.bookmarket.exception.InvalidRequestException;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
@@ -34,5 +35,13 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         body.put("message", "Author not found");
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<Object> handleInvalidRequestException(InvalidRequestException ex, WebRequest request){
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "You left the empty field");
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 }

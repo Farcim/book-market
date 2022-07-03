@@ -1,4 +1,4 @@
-package ru.example.bookmarket.controller;
+package ru.example.bookmarket.controller.Impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.example.bookmarket.controller.AuthorController;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.service.AuthorService;
 
