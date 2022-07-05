@@ -89,6 +89,6 @@ public interface BookController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping("/page")
+    @GetMapping("/books")
     Page<BookDTO> getByPage(@PageableDefault Pageable pageable);
 }
