@@ -72,6 +72,6 @@ public interface AuthorController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping("/authors")
+    @GetMapping("/page")
     Page<AuthorDTO> getByPage(@PageableDefault(size = 5, page = 0) Pageable pageable);
 }
