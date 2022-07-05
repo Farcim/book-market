@@ -1,4 +1,4 @@
-package ru.example.bookmarket.genries;
+package ru.example.bookmarket.genre;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

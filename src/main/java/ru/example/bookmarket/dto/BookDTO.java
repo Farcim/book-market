@@ -2,7 +2,7 @@ package ru.example.bookmarket.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.example.bookmarket.genries.Genre;
+import ru.example.bookmarket.genre.Genre;
 
 import java.util.Set;
 
