@@ -17,7 +17,7 @@ import ru.example.bookmarket.genries.Genre;
 import java.util.Collection;
 import java.util.List;
 
-@RequestMapping(value = "/genre")
+@RequestMapping(value = "/genres")
 @RestController
 @Tag(name = "Genre controller", description = "Get genres from table")
 public interface GenreController {
@@ -31,6 +31,6 @@ public interface GenreController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping("/page")
+    @GetMapping("/genres")
     Page<Genre> getGenres(@PageableDefault Pageable pageable);
 }
