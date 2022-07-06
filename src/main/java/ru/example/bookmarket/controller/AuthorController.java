@@ -11,7 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import ru.example.bookmarket.dto.AuthorDTO;
 
-@RequestMapping(value = "/author")
+@RequestMapping(value = "/authors")
 @RestController
 @Tag(name = "Author controller", description = "CRUD methods with author")
 public interface AuthorController {
@@ -72,6 +72,6 @@ public interface AuthorController {
                     description = "Not available",
                     content = @Content)
     })
-    @GetMapping("/pageable")
+    @GetMapping("/page")
     Page<AuthorDTO> getByPage(@PageableDefault(size = 5, page = 0) Pageable pageable);
 }

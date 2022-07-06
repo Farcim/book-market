@@ -10,14 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.example.bookmarket.genries.Genre;
 
-import java.util.Collection;
-import java.util.List;
-
-@RequestMapping(value = "/genre")
+@RequestMapping(value = "/genres")
 @RestController
 @Tag(name = "Genre controller", description = "Get genres from table")
 public interface GenreController {

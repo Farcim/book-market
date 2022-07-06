@@ -14,7 +14,7 @@ import ru.example.bookmarket.dto.BookDTOSave;
 
 import java.util.List;
 
-@RequestMapping(value = "/book")
+@RequestMapping(value = "/books")
 @RestController
 @Tag(name = "Book controller", description = "CRUD methods with book")
 public interface BookController {
