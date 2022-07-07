@@ -10,4 +10,4 @@ services:
       - "5432:5432"
     build:
       context: docker
-      dockerfile: C:\Users\User\Desktop\java Projects\bookrepository\docker\Dockerfile
+      dockerfile: ../Dockerfile
