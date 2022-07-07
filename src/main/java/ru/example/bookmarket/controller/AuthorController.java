@@ -1,5 +1,6 @@
 package ru.example.bookmarket.controller;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -73,5 +74,5 @@ public interface AuthorController {
                     content = @Content)
     })
     @GetMapping("/page")
-    Page<AuthorDTO> getByPage(@PageableDefault(size = 5, page = 0) Pageable pageable);
+    Page<AuthorDTO> getByPage(@PageableDefault(page = 0, size = 10,sort = "") Pageable pageable);
 }

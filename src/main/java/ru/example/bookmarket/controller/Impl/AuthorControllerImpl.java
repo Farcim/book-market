@@ -21,7 +21,7 @@ public class AuthorControllerImpl implements AuthorController {
         return authorService.save(authorDTO);
     }
 
-    public Page<AuthorDTO> getByPage(@PageableDefault(size = 5, page = 0) Pageable pageable) {
+    public Page<AuthorDTO> getByPage(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         return authorService.getByPage(pageable);
     }
 

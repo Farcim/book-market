@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RestController;
 import ru.example.bookmarket.controller.GenreController;
-import ru.example.bookmarket.genries.Genre;
+import ru.example.bookmarket.genre.Genre;
 import ru.example.bookmarket.service.GenreService;
 
 @RestController

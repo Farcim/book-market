@@ -66,14 +66,14 @@ public class Converter {
                 .build();
     }
 
-    public static ru.example.bookmarket.genries.Genre entityToEnum(Genre genre) {
-        return Stream.of(ru.example.bookmarket.genries.Genre.values())
+    public static ru.example.bookmarket.genre.Genre entityToEnum(Genre genre) {
+        return Stream.of(ru.example.bookmarket.genre.Genre.values())
                 .filter(genreModel -> Objects.equals(genre.getName(), genreModel.name()))
                 .findFirst()
                 .orElseThrow(() -> new GenreNotFoundException(genre.getName()));
     }
 
-    public static Genre enumToEntity(ru.example.bookmarket.genries.Genre genreEnum) {
+    public static Genre enumToEntity(ru.example.bookmarket.genre.Genre genreEnum) {
         return Genre.builder()
                 .name(genreEnum.name())
                 .id(genreEnum.getId())

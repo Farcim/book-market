@@ -11,9 +11,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.example.bookmarket.genries.Genre;
+import ru.example.bookmarket.genre.Genre;
 
-@RequestMapping(value = "/genres")
+@RequestMapping(value = "/genre")
 @RestController
 @Tag(name = "Genre controller", description = "Get genres from table")
 public interface GenreController {
@@ -28,5 +28,5 @@ public interface GenreController {
                     content = @Content)
     })
     @GetMapping("/page")
-    Page<Genre> getGenres(@PageableDefault Pageable pageable);
+    Page<Genre> getGenres(@PageableDefault(page = 0, size = 10,sort = "") Pageable pageable);
 }
