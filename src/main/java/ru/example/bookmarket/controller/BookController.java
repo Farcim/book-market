@@ -90,5 +90,5 @@ public interface BookController {
                     content = @Content)
     })
     @GetMapping("/page")
-    Page<BookDTO> getByPage(@PageableDefault Pageable pageable);
+    Page<BookDTO> getByPage(@PageableDefault(page = 0, size = 10,sort = "") Pageable pageable);
 }

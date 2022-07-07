@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -74,5 +75,5 @@ public interface AuthorController {
                     content = @Content)
     })
     @GetMapping("/page")
-    Page<AuthorDTO> getByPage(@PageableDefault(size = 5, page = 0) Pageable pageable);
+    Page<AuthorDTO> getByPage(@PageableDefault() Pageable pageable);
 }

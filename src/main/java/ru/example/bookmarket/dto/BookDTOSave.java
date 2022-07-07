@@ -9,15 +9,15 @@ import javax.persistence.GenerationType;
 import java.util.Set;
 @Data
 @Builder
-@Schema
+@Schema(description = "book entity saver", title = "book saver")
 public class BookDTOSave {
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Schema(type = "string", example = " ")
+    @Schema(type = "int64", example = "null")
     private Long id;
-    @Schema(type = "string", example = " ")
+    @Schema(type = "string", example = "Страшный утенок")
     private String name;
     private Set<Long> authorIds;
     private Set<Integer> genreIds;
-
+    @Schema(type = "int32",example = "456")
     private Integer price;
 }

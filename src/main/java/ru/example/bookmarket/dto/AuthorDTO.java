@@ -8,11 +8,11 @@ import ru.example.bookmarket.genre.Genre;
 import java.util.Set;
 @Data
 @Builder
-@Schema
+@Schema(description = "author entity", title = "author")
 public class AuthorDTO {
-    @Schema(type = "string", example = " ")
+    @Schema(type = "int64", example = "null")
     private Long id;
-    @Schema(type = "string", example = " ")
+    @Schema(type = "string", example = "Дмитрий Петрович")
     private String name;
     private Set<Genre> genres;
 
