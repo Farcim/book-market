@@ -11,7 +11,6 @@ import java.util.Set;
 @Builder
 @Schema(description = "book entity saver", title = "book saver")
 public class BookDTOSave {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(type = "int64", example = "null")
     private Long id;
     @Schema(type = "string", example = "Страшный утенок")
