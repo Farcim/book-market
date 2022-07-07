@@ -29,5 +29,5 @@ public interface GenreController {
                     content = @Content)
     })
     @GetMapping("/page")
-    Page<Genre> getGenres(@PageableDefault Pageable pageable);
+    Page<Genre> getGenres(@PageableDefault(page = 0, size = 10,sort = "") Pageable pageable);
 }

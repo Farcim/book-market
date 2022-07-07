@@ -75,5 +75,5 @@ public interface AuthorController {
                     content = @Content)
     })
     @GetMapping("/page")
-    Page<AuthorDTO> getByPage(@PageableDefault() Pageable pageable);
+    Page<AuthorDTO> getByPage(@PageableDefault(page = 0, size = 10,sort = "") Pageable pageable);
 }

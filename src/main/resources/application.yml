@@ -4,6 +4,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/Book
     username: postgres
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: validate
