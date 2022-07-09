@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
 import ru.example.bookmarket.exception.AuthorNotFoundException;
@@ -12,7 +13,9 @@ import ru.example.bookmarket.exception.InvalidRequestException;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
+import ru.example.bookmarket.model.Image;
 import ru.example.bookmarket.repository.BookRepository;
+import ru.example.bookmarket.repository.ImageRepository;
 import ru.example.bookmarket.util.Converter;
 
 import javax.persistence.EntityNotFoundException;
@@ -80,4 +83,5 @@ public class BookService {
         return bookRepository.findAll(pageable)
                 .map(Converter::bookToDTO);
     }
+
 }
