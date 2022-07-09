@@ -3,6 +3,8 @@ package ru.example.bookmarket.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -29,5 +31,7 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
     private Integer price;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Image> images = new ArrayList<>();
 
 }
