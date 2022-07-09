@@ -1,11 +1,14 @@
 package ru.example.bookmarket.util;
 
+import lombok.SneakyThrows;
+import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.exception.GenreNotFoundException;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
+import ru.example.bookmarket.model.Image;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -78,6 +81,17 @@ public class Converter {
                 .name(genreEnum.name())
                 .id(genreEnum.getId())
                 .build();
+    }
+
+    @SneakyThrows
+    public static Image toImageEntity(MultipartFile file) {
+        return Image.builder()
+                .name(file.getName())
+                .type(file.getContentType())
+                .size(file.getSize())
+                .bytes(file.getBytes())
+                .build();
+
     }
 
 }
