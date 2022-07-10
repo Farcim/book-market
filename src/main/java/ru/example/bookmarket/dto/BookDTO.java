@@ -4,10 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import ru.example.bookmarket.genre.Genre;
-import ru.example.bookmarket.model.Image;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 
@@ -23,5 +20,4 @@ public class BookDTO  {
     private Set<Genre> genres;
     @Schema(type = "int32", example = "456.3")
     private Integer price;
-    private List<Image> images;
 }
