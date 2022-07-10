@@ -20,11 +20,9 @@ public class ImageControllerImpl implements ImageController {
         return imageService.save(files);
     }
 
-
     public Image findById(@PathVariable Long id) {
         return imageService.findById(id);
     }
-
 
     public void deleteById(@PathVariable Long id) {
         imageService.deleteById(id);
