@@ -30,9 +30,27 @@ public interface ImageController {
             produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     List<Image> save(@RequestBody() List<MultipartFile> files);
 
+    @Operation(summary = "Find images")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Find",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Not available",
+                    content = @Content)
+    })
     @GetMapping("/{id}")
     Image findById(@PathVariable Long id);
 
+    @Operation(summary = "Delete images")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Delete",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Not available",
+                    content = @Content)
+    })
     @DeleteMapping("/{id}")
     void deleteById(@PathVariable Long id);
 }
