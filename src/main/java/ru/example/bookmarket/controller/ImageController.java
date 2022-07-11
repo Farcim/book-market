@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.model.Image;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping(value = "/images")
@@ -26,9 +27,9 @@ public interface ImageController {
                     content = @Content)
     })
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    List<Image> save(@RequestBody() List<MultipartFile> files);
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    List<Image> save(@RequestBody() List<MultipartFile> files) throws IOException;
 
     @Operation(summary = "Find images")
     @ApiResponses(value = {

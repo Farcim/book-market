@@ -1,6 +1,5 @@
 package ru.example.bookmarket.util;
 
-import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
@@ -10,6 +9,7 @@ import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
 import ru.example.bookmarket.model.Image;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -83,15 +83,18 @@ public class Converter {
                 .build();
     }
 
-    @SneakyThrows
+
     public static Image toImageEntity(MultipartFile file) {
-        return Image.builder()
-                .name(file.getName())
-                .type(file.getContentType())
-                .size(file.getSize())
-                .bytes(file.getBytes())
-                .build();
-
+        try {
+            return Image.builder()
+                    .name(file.getName())
+                    .type(file.getContentType())
+                    .size(file.getSize())
+                    .bytes(file.getBytes())
+                    .build();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-
 }

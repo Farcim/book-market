@@ -8,7 +8,6 @@ import ru.example.bookmarket.model.Image;
 import ru.example.bookmarket.repository.ImageRepository;
 import ru.example.bookmarket.util.Converter;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class ImageService {
     @Transactional
     public Image findById(Long id) {
         return imageRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new ImageNotFoundException(id));
     }
 
     public void deleteById(Long id) {
