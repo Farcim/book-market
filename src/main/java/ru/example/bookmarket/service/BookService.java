@@ -80,5 +80,4 @@ public class BookService {
         return bookRepository.findAll(pageable)
                 .map(Converter::bookToDTO);
     }
-
 }
