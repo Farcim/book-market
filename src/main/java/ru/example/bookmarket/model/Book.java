@@ -35,6 +35,6 @@ public class Book {
     @JoinTable(name = "book_image",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private List<Image> images = new ArrayList<>();
+    private List<Image> images;
 
 }
