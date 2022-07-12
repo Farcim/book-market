@@ -72,6 +72,7 @@ public class BookService {
                 .genres(new HashSet<>(genres))
                 .authors(new HashSet<>(authors))
                 .price(dto.getPrice())
+                .localDateTime(dto.getLocalDateTime())
                 .build();
         return Converter.bookToDTO(bookRepository.save(book));
     }
@@ -80,4 +81,5 @@ public class BookService {
         return bookRepository.findAll(pageable)
                 .map(Converter::bookToDTO);
     }
+
 }

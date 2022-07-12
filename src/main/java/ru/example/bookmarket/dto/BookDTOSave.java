@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.time.LocalDateTime;
 import java.util.Set;
 @Data
 @Builder
@@ -19,4 +20,5 @@ public class BookDTOSave {
     private Set<Integer> genreIds;
     @Schema(type = "int32",example = "456")
     private Integer price;
+    LocalDateTime localDateTime;
 }

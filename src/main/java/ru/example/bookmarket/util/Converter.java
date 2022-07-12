@@ -28,6 +28,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(book.getName())
                 .price(book.getPrice())
+                .localDateTime(book.getLocalDateTime())
                 .build();
     }
 
@@ -44,6 +45,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(bookDTO.getName())
                 .price(bookDTO.getPrice())
+                .localDateTime(bookDTO.getLocalDateTime())
                 .build();
     }
 
