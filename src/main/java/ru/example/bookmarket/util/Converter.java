@@ -28,7 +28,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(book.getName())
                 .price(book.getPrice())
-                .localDateTime(book.getLocalDateTime())
+                .creationDate(book.getCreationDate())
                 .build();
     }
 
@@ -45,7 +45,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(bookDTO.getName())
                 .price(bookDTO.getPrice())
-                .localDateTime(bookDTO.getLocalDateTime())
+                .creationDate(bookDTO.getCreationDate())
                 .build();
     }
 
@@ -84,7 +84,6 @@ public class Converter {
                 .id(genreEnum.getId())
                 .build();
     }
-
 
     public static Image toImageEntity(MultipartFile file) {
         try {
