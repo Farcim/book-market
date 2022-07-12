@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.example.bookmarket.config.TimeConfig;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.dto.BookDTOSave;
 import ru.example.bookmarket.exception.AuthorNotFoundException;
@@ -16,10 +17,10 @@ import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.util.Converter;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -66,13 +67,14 @@ public class BookService {
     public BookDTO save(BookDTOSave dto) {
         List<Genre> genres = genreService.findAllByIds(dto.getGenreIds());
         List<Author> authors = authorService.findAllByIds(dto.getAuthorIds());
+        TimeConfig timeConfig = new TimeConfig();
         Book book = Book.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .genres(new HashSet<>(genres))
                 .authors(new HashSet<>(authors))
                 .price(dto.getPrice())
-                .localDateTime(dto.getLocalDateTime())
+                .creationDate(ZonedDateTime.now(timeConfig.clock()))
                 .build();
         return Converter.bookToDTO(bookRepository.save(book));
     }

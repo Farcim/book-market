@@ -1,9 +1,14 @@
 package ru.example.bookmarket.model;
 
 import lombok.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
+import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -36,5 +41,5 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     private List<Image> images;
-    public LocalDateTime localDateTime;
+    private ZonedDateTime creationDate;
 }

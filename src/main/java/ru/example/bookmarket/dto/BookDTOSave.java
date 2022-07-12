@@ -4,9 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Set;
 @Data
 @Builder
@@ -18,7 +17,7 @@ public class BookDTOSave {
     private String name;
     private Set<Long> authorIds;
     private Set<Integer> genreIds;
-    @Schema(type = "int32",example = "456")
+    @Schema(type = "int32", example = "456")
     private Integer price;
-    LocalDateTime localDateTime;
+    private ZonedDateTime creationDate;
 }
