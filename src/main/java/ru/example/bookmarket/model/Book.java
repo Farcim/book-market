@@ -3,7 +3,7 @@ package ru.example.bookmarket.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -36,5 +36,5 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     private List<Image> images;
-
+    public LocalDateTime localDateTime;
 }
