@@ -29,7 +29,7 @@ public interface ImageController {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    List<Image> save(@RequestBody() List<MultipartFile> files) throws IOException;
+    List<Image> save(@RequestBody() List<MultipartFile> files);
 
     @Operation(summary = "Find images")
     @ApiResponses(value = {
