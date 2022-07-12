@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import ru.example.bookmarket.genre.Genre;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 
@@ -20,4 +22,5 @@ public class BookDTO  {
     private Set<Genre> genres;
     @Schema(type = "int32", example = "456.3")
     private Integer price;
+    private ZonedDateTime creationDate;
 }

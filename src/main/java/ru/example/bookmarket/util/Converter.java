@@ -1,12 +1,15 @@
 package ru.example.bookmarket.util;
 
+import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.exception.GenreNotFoundException;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
+import ru.example.bookmarket.model.Image;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,6 +28,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(book.getName())
                 .price(book.getPrice())
+                .creationDate(book.getCreationDate())
                 .build();
     }
 
@@ -41,6 +45,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(bookDTO.getName())
                 .price(bookDTO.getPrice())
+                .creationDate(bookDTO.getCreationDate())
                 .build();
     }
 
@@ -80,4 +85,17 @@ public class Converter {
                 .build();
     }
 
+    public static Image toImageEntity(MultipartFile file) {
+        try {
+            return Image.builder()
+                    .name(file.getName())
+                    .type(file.getContentType())
+                    .size(file.getSize())
+                    .bytes(file.getBytes())
+                    .build();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
