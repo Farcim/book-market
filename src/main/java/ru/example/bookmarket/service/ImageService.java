@@ -33,8 +33,8 @@ public class ImageService {
     public void deleteById(Long id) {
         if (imageRepository.existsById(id)) {
             imageRepository.deleteById(id);
-        } else throw new ImageNotFoundException(id);
-
-
+        } else {
+            throw new ImageNotFoundException(id);
+        }
     }
 }

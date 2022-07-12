@@ -1,5 +1,6 @@
 package ru.example.bookmarket.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
@@ -14,6 +15,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 public class Converter {
     public static BookDTO bookToDTO(Book book) {
         return BookDTO.builder()
@@ -94,7 +96,7 @@ public class Converter {
                     .bytes(file.getBytes())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info("Something went wrong, please try again later.");
         }
         return null;
     }
