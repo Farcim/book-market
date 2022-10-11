@@ -1,2 +1,2 @@
 alter table book
-    add column creation_date timestamp with time zone default null;
+    add column creation_date timestamp default null;

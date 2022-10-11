@@ -17,7 +17,6 @@ import ru.example.bookmarket.repository.BookRepository;
 import ru.example.bookmarket.util.Converter;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,14 +66,14 @@ public class BookService {
     public BookDTO save(BookDTOSave dto) {
         List<Genre> genres = genreService.findAllByIds(dto.getGenreIds());
         List<Author> authors = authorService.findAllByIds(dto.getAuthorIds());
-        TimeConfig timeConfig = new TimeConfig();
+        TimeConfig config = new TimeConfig();
         Book book = Book.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .genres(new HashSet<>(genres))
                 .authors(new HashSet<>(authors))
                 .price(dto.getPrice())
-                .creationDate(ZonedDateTime.now(timeConfig.clock()))
+                .creationDate(config.clock())
                 .build();
         return Converter.bookToDTO(bookRepository.save(book));
     }
