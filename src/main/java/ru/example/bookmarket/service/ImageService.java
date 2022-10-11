@@ -24,7 +24,6 @@ public class ImageService {
         return imageRepository.saveAll(images);
     }
 
-    @Transactional
     public Image findById(Long id) {
         return imageRepository.findById(id)
                 .orElseThrow(() -> new ImageNotFoundException(id));
