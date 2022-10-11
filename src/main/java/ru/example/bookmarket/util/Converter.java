@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
 import ru.example.bookmarket.exception.GenreNotFoundException;
+import ru.example.bookmarket.exception.ImageSaveException;
 import ru.example.bookmarket.model.Author;
 import ru.example.bookmarket.model.Book;
 import ru.example.bookmarket.model.Genre;
@@ -96,8 +97,7 @@ public class Converter {
                     .bytes(file.getBytes())
                     .build();
         } catch (IOException e) {
-            log.info("Something went wrong, please try again later.");
+            throw new ImageSaveException(e);
         }
-        return null;
     }
 }
