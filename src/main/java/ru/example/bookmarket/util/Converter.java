@@ -1,6 +1,5 @@
 package ru.example.bookmarket.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
@@ -31,6 +30,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(book.getName())
                 .price(book.getPrice())
+                .creationDate(book.getCreationDate())
                 .build();
     }
 
@@ -47,6 +47,7 @@ public class Converter {
                         .collect(Collectors.toSet()))
                 .name(bookDTO.getName())
                 .price(bookDTO.getPrice())
+                .creationDate(bookDTO.getCreationDate())
                 .build();
     }
 

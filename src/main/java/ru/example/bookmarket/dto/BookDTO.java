@@ -5,13 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import ru.example.bookmarket.genre.Genre;
 
+import java.time.Clock;
 import java.util.Set;
 
 
 @Data
 @Builder
 @Schema(description = "book entity", title = "book", name = "Book")
-public class BookDTO  {
+public class BookDTO {
     @Schema(type = "int64", example = "null")
     private Long id;
     @Schema(type = "string", example = "Кот и пес")
@@ -20,4 +21,5 @@ public class BookDTO  {
     private Set<Genre> genres;
     @Schema(type = "int32", example = "456.3")
     private Integer price;
+    private Clock creationDate;
 }
