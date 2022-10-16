@@ -1,2 +1,2 @@
 alter table book
-    add column creation_date timestamp default null;
+    add column if not exists creation_date timestamp;

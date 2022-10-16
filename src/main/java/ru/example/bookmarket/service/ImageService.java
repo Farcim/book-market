@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class ImageService {
     private final ImageRepository imageRepository;
 
+    @Transactional
     public List<Image> save(List<MultipartFile> files) {
         List<Image> images = files.stream()
                 .map(Converter::toImageEntity)
@@ -24,7 +25,6 @@ public class ImageService {
         return imageRepository.saveAll(images);
     }
 
-    @Transactional
     public Image findById(Long id) {
         return imageRepository.findById(id)
                 .orElseThrow(() -> new ImageNotFoundException(id));
