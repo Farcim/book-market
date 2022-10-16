@@ -1,6 +1,7 @@
 package ru.example.bookmarket.controller.Impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,9 @@ import java.util.List;
 public class ImageControllerImpl implements ImageController {
     private final ImageService imageService;
 
-    public List<Image> save(@RequestBody List<MultipartFile> files) {
-        return imageService.save(files);
+    public ResponseEntity<?> save(@RequestBody List<MultipartFile> files) {
+        imageService.save(files);
+        return ResponseEntity.ok().build();
     }
 
     public Image findById(@PathVariable Long id) {

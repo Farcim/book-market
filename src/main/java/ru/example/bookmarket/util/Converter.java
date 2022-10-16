@@ -1,9 +1,9 @@
 package ru.example.bookmarket.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import ru.example.bookmarket.dto.AuthorDTO;
 import ru.example.bookmarket.dto.BookDTO;
+import ru.example.bookmarket.dto.ImageDTO;
 import ru.example.bookmarket.exception.GenreNotFoundException;
 import ru.example.bookmarket.exception.ImageSaveException;
 import ru.example.bookmarket.model.Author;
@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Slf4j
 public class Converter {
     public static BookDTO bookToDTO(Book book) {
         return BookDTO.builder()
@@ -99,5 +98,26 @@ public class Converter {
         } catch (IOException e) {
             throw new ImageSaveException(e);
         }
+    }
+
+    public static Image dtoToImage(ImageDTO dto) {
+        return Image.builder()
+                .id(dto.getId())
+                .type(dto.getType())
+                .size(dto.getSize())
+                .name(dto.getName())
+                .bytes(dto.getBytes())
+                .build();
+    }
+
+    public static ImageDTO imageToDTO(Image image) {
+        return ImageDTO.builder()
+                .id(image.getId())
+                .type(image.getType())
+                .size(image.getSize())
+                .name(image.getName())
+                .bytes(image.getBytes())
+                .build();
+
     }
 }
